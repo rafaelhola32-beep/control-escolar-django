@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    Lista de Materias
+</h1>
+
+<a href="/materias/crear/"
+   class="btn btn-primary mb-3">
+
+    Nueva Materia
+
+</a>
+
+<table class="table table-striped table-bordered">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>Nombre</th>
+            <th>Clave</th>
+            <th>Créditos</th>
+            <th>Carrera</th>
+            <th>Acciones</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for materia in materias %}
+
+        <tr>
+
+            <td>{{ materia.nombre }}</td>
+            <td>{{ materia.clave }}</td>
+            <td>{{ materia.creditos }}</td>
+            <td>{{ materia.carrera }}</td>
+
+            <td>
+
+                <a href="/materias/editar/{{ materia.id }}/"
+                   class="btn btn-warning btn-sm">
+
+                    Editar
+
+                </a>
+
+                <a href="/materias/eliminar/{{ materia.id }}/"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Deseas eliminar esta materia?')">
+
+                    Eliminar
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

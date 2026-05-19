@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    Lista de Profesores
+</h1>
+
+<a href="/profesores/crear/"
+   class="btn btn-primary mb-3">
+
+    Nuevo Profesor
+
+</a>
+
+<table class="table table-striped table-bordered">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for profesor in profesores %}
+
+        <tr>
+
+            <td>{{ profesor.nombre }}</td>
+            <td>{{ profesor.correo }}</td>
+            <td>{{ profesor.telefono }}</td>
+
+            <td>
+
+                <a href="/profesores/editar/{{ profesor.id }}/"
+                   class="btn btn-warning btn-sm">
+
+                    Editar
+
+                </a>
+
+                <a href="/profesores/eliminar/{{ profesor.id }}/"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Deseas eliminar este profesor?')">
+
+                    Eliminar
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

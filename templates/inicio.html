@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center mb-5">
+
+    <h1 class="display-4">
+        Sistema Web de Control Escolar
+    </h1>
+
+    <p class="lead">
+        Proyecto desarrollado con Django, PostgreSQL y Bootstrap
+    </p>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card text-center shadow">
+
+            <div class="card-body">
+
+                <h2>
+                    {{ total_estudiantes }}
+                </h2>
+
+                <h5>
+                    Estudiantes
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card text-center shadow">
+
+            <div class="card-body">
+
+                <h2>
+                    {{ total_profesores }}
+                </h2>
+
+                <h5>
+                    Profesores
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card text-center shadow">
+
+            <div class="card-body">
+
+                <h2>
+                    {{ total_materias }}
+                </h2>
+
+                <h5>
+                    Materias
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card text-center shadow">
+
+            <div class="card-body">
+
+                <h2>
+                    {{ total_grupos }}
+                </h2>
+
+                <h5>
+                    Grupos
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h3>
+                Bienvenido al Sistema de Control Escolar
+            </h3>
+
+            <p>
+                Este sistema permite administrar estudiantes,
+                profesores, materias, grupos y calificaciones
+                utilizando Django, PostgreSQL y Bootstrap.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

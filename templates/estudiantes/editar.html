@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Editar Estudiante</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ formulario.as_p }}
+
+    <button class="btn btn-warning">
+
+        Actualizar
+
+    </button>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Lista de Grupos</h1>
+
+<a href="/grupos/crear/"
+   class="btn btn-primary mb-3">
+
+   Nuevo Grupo
+
+</a>
+
+<table class="table table-bordered">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>Grupo</th>
+            <th>Profesor</th>
+            <th>Materia</th>
+            <th>Aula</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for grupo in grupos %}
+
+        <tr>
+
+            <td>{{ grupo.nombre }}</td>
+            <td>{{ grupo.profesor }}</td>
+            <td>{{ grupo.materia }}</td>
+            <td>{{ grupo.aula }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
