@@ -3,6 +3,7 @@ import os
 import dj_database_url
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -260,3 +261,17 @@ JAZZMIN_UI_TWEAKS = {
     }
 
 }
+import os
+import django
+
+if os.environ.get('CREATE_ADMIN') == 'true':
+    django.setup()
+
+    from django.contrib.auth.models import User
+
+    if not User.objects.filter(username='Eduardo').exists():
+        User.objects.create_superuser(
+            'Eduardo',
+            'correo@correo.com',
+            'Josue1203'
+        )
