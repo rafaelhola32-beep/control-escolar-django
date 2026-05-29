@@ -6,6 +6,7 @@ from materias.models import Materia
 from grupos.models import Grupo
 
 
+
 def inicio(request):
 
     total_estudiantes = Estudiante.objects.count()

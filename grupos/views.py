@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Grupo
 from .forms import GrupoForm
 
+from estudiantes.models import Estudiante
+
 
 def lista_grupos(request):
 
@@ -67,3 +69,29 @@ def eliminar_grupo(request, id):
     grupo.delete()
 
     return redirect('lista_grupos')
+
+
+# DETALLE DEL GRUPO
+def detalle_grupo(request, id):
+
+    grupo = get_object_or_404(
+        Grupo,
+        id=id
+    )
+
+    estudiantes = Estudiante.objects.filter(
+        grupo=grupo
+    )
+
+    context = {
+
+        'grupo': grupo,
+        'estudiantes': estudiantes
+
+    }
+
+    return render(
+        request,
+        'grupos/detalle.html',
+        context
+    )

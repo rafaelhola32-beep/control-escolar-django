@@ -6,6 +6,7 @@ from aulas.models import Aula
 from horarios.models import Horario
 from periodos.models import Periodo
 from estudiantes.models import Estudiante
+from carreras.models import Carrera
 
 
 class Grupo(models.Model):
@@ -39,6 +40,11 @@ class Grupo(models.Model):
 
     estudiantes = models.ManyToManyField(
         Estudiante
+    )
+        # NUEVO CAMPO
+    carrera = models.ForeignKey(
+        Carrera,
+        on_delete=models.CASCADE
     )
 
     def __str__(self):

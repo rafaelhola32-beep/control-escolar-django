@@ -2,47 +2,110 @@
 
 {% block content %}
 
-<h1>Lista de Grupos</h1>
+<div class="container mt-4">
 
-<a href="/grupos/crear/"
-   class="btn btn-primary mb-3">
+    <div class="d-flex justify-content-between mb-4">
 
-   Nuevo Grupo
+        <h2>
+            📚 Lista de Grupos
+        </h2>
 
-</a>
+        <a href="{% url 'crear_grupo' %}"
+           class="btn btn-success">
 
-<table class="table table-bordered">
+            ➕ Nuevo Grupo
 
-    <thead class="table-dark">
+        </a>
 
-        <tr>
+    </div>
 
-            <th>Grupo</th>
-            <th>Profesor</th>
-            <th>Materia</th>
-            <th>Aula</th>
-
-        </tr>
-
-    </thead>
-
-    <tbody>
+    <div class="row">
 
         {% for grupo in grupos %}
 
-        <tr>
+        <div class="col-md-4 mb-4">
 
-            <td>{{ grupo.nombre }}</td>
-            <td>{{ grupo.profesor }}</td>
-            <td>{{ grupo.materia }}</td>
-            <td>{{ grupo.aula }}</td>
+            <div class="card h-100 shadow">
 
-        </tr>
+                <div class="card-header bg-primary text-white">
+
+                    <h4>
+
+                        {{ grupo.nombre }}
+
+                    </h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+
+                        <strong>Carrera:</strong>
+
+                        {{ grupo.carrera }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Profesor:</strong>
+
+                        {{ grupo.profesor }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Horario:</strong>
+
+                        {{ grupo.horario }}
+
+                    </p>
+
+                </div>
+
+                <div class="card-footer text-center">
+
+                    <a href="{% url 'detalle_grupo' grupo.id %}"
+                       class="btn btn-info btn-sm">
+
+                        👁 Ver Información
+
+                    </a>
+
+                    <a href="{% url 'editar_grupo' grupo.id %}"
+                       class="btn btn-warning btn-sm">
+
+                        ✏ Editar
+
+                    </a>
+
+                    <a href="{% url 'eliminar_grupo' grupo.id %}"
+                       class="btn btn-danger btn-sm">
+
+                        🗑 Eliminar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="alert alert-warning">
+
+            No hay grupos registrados.
+
+        </div>
 
         {% endfor %}
 
-    </tbody>
+    </div>
 
-</table>
+</div>
 
 {% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>
+                Información del Grupo
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <h4>
+                Grupo: {{ grupo.nombre }}
+            </h4>
+
+            <hr>
+
+            <p>
+                <strong>Profesor:</strong>
+                {{ grupo.profesor }}
+            </p>
+
+            <p>
+                <strong>Carrera:</strong>
+                {{ grupo.carrera }}
+            </p>
+
+            <p>
+                <strong>Horario:</strong>
+                {{ grupo.horario }}
+            </p>
+
+            <hr>
+
+            <h4>
+                Lista de Estudiantes
+            </h4>
+
+            <table class="table table-bordered">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Nombre</th>
+
+                        <th>Matrícula</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for estudiante in estudiantes %}
+
+                    <tr>
+
+                        <td>
+                            {{ forloop.counter }}
+                        </td>
+
+                        <td>
+                            {{ estudiante.nombre }}
+                        </td>
+
+                        <td>
+                            {{ estudiante.matricula }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

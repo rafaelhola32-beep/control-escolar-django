@@ -27,4 +27,11 @@ urlpatterns = [
         eliminar_grupo,
         name='eliminar_grupo'
     ),
+
+    path(
+        'detalle/<int:id>/',
+        detalle_grupo,
+        name='detalle_grupo'
+    ),
+
 ]

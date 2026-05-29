@@ -15,6 +15,10 @@ class GrupoForm(forms.ModelForm):
                 attrs={'class': 'form-control'}
             ),
 
+            'carrera': forms.Select(
+                attrs={'class': 'form-select'}
+            ),
+
             'profesor': forms.Select(
                 attrs={'class': 'form-select'}
             ),
