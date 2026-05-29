@@ -17,9 +17,13 @@ SECRET_KEY = 'django-insecure-kk8pvj_hv9r8x7=b+1pe6l0dxx&4n49#+!^(z%w_$(pisok9&6
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'https://control-escolar-2026.onrender.com',
+    'control-escolar-2026.onrender.com',
     '127.0.0.1',
     'localhost'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://control-escolar-2026.onrender.com'
 ]
 
 
