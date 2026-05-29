@@ -1,11 +1,17 @@
-"""
-WSGI config for config project.
+import os
 
-It exposes the WSGI callable as a module-level variable named ``application``.
+if os.environ.get('CREATE_SUPERUSER') == 'true':
+    import django
+    django.setup()
 
-For more information on this file, see
-https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/
-"""
+    from django.contrib.auth.models import User
+
+    if not User.objects.filter(username='Eduardo').exists():
+        User.objects.create_superuser(
+            'Eduardo',
+            'rafael.hola32@gmail.com',
+            'Josue1203'
+        )
 
 import os
 
