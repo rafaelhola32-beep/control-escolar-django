@@ -9,18 +9,12 @@
         <div class="card-header bg-primary text-white">
 
             <h3>
-                Información del Grupo
+                Grupo: {{ grupo.nombre }}
             </h3>
 
         </div>
 
         <div class="card-body">
-
-            <h4>
-                Grupo: {{ grupo.nombre }}
-            </h4>
-
-            <hr>
 
             <p>
                 <strong>Profesor:</strong>
@@ -49,11 +43,13 @@
 
                     <tr>
 
-                        <th>#</th>
+                        <th>Matrícula</th>
 
                         <th>Nombre</th>
 
-                        <th>Matrícula</th>
+                        <th>Correo</th>
+
+                        <th>Calificación</th>
 
                     </tr>
 
@@ -61,20 +57,36 @@
 
                 <tbody>
 
-                    {% for estudiante in estudiantes %}
+                    {% for c in calificaciones %}
 
                     <tr>
 
                         <td>
-                            {{ forloop.counter }}
+                            {{ c.estudiante.matricula }}
                         </td>
 
                         <td>
-                            {{ estudiante.nombre }}
+                            {{ c.estudiante.nombre }}
                         </td>
 
                         <td>
-                            {{ estudiante.matricula }}
+                            {{ c.estudiante.correo }}
+                        </td>
+
+                        <td>
+                            {{ c.calificacion }}
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="4">
+
+                            No hay calificaciones registradas.
+
                         </td>
 
                     </tr>
