@@ -57,24 +57,42 @@
 
                 <tbody>
 
-                    {% for c in calificaciones %}
+                    {% for estudiante in estudiantes %}
 
                     <tr>
 
                         <td>
-                            {{ c.estudiante.matricula }}
+                            {{ estudiante.matricula }}
                         </td>
 
                         <td>
-                            {{ c.estudiante.nombre }}
+                            {{ estudiante.nombre }}
                         </td>
 
                         <td>
-                            {{ c.estudiante.correo }}
+                            {{ estudiante.correo }}
                         </td>
 
                         <td>
-                            {{ c.calificacion }}
+
+                            {% with encontrada=False %}
+
+                                {% for calificacion in estudiante.calificacion_set.all %}
+
+                                    {% if calificacion.grupo.id == grupo.id %}
+
+                                        {{ calificacion.calificacion }}
+
+                                    {% endif %}
+
+                                {% empty %}
+
+                                    Sin captura
+
+                                {% endfor %}
+
+                            {% endwith %}
+
                         </td>
 
                     </tr>
@@ -85,7 +103,7 @@
 
                         <td colspan="4">
 
-                            No hay calificaciones registradas.
+                            No hay estudiantes en este grupo.
 
                         </td>
 

@@ -3,9 +3,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Grupo
 from .forms import GrupoForm
 
-from estudiantes.models import Estudiante
-from calificaciones.models import Calificacion
-
 
 def lista_grupos(request):
 
@@ -79,15 +76,13 @@ def detalle_grupo(request, id):
         id=id
     )
 
-    calificaciones = Calificacion.objects.filter(
-        grupo=grupo
-    )
+    estudiantes = grupo.estudiantes.all()
 
     return render(
         request,
         'grupos/detalle.html',
         {
             'grupo': grupo,
-            'calificaciones': calificaciones
+            'estudiantes': estudiantes
         }
     )
