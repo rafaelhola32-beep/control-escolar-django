@@ -57,42 +57,55 @@
 
 <tbody>
 
-    {% for estudiante in estudiantes %}
+{% for dato in datos %}
 
-    <tr>
+<tr>
 
-        <td>
+    <td>
+        {{ dato.estudiante.matricula }}
+    </td>
 
-            {{ estudiante.matricula }}
+    <td>
+        {{ dato.estudiante.nombre }}
+    </td>
 
-        </td>
+    <td>
+        {{ dato.estudiante.correo }}
+    </td>
 
-        <td>
+    <td>
 
-            {{ estudiante.nombre }}
+        {% if dato.calificacion %}
 
-        </td>
+            <strong>
 
-        <td>
+                {{ dato.calificacion.calificacion }}
 
-            {{ estudiante.correo }}
+            </strong>
 
-        </td>
+            <a href="{% url 'editar_calificacion' dato.calificacion.id %}"
+               class="btn btn-warning btn-sm">
 
-        <td>
+                Editar
 
-            <a href="{% url 'capturar_calificacion' estudiante.id grupo.id %}"
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'capturar_calificacion' dato.estudiante.id grupo.id %}"
                class="btn btn-success btn-sm">
 
                 Capturar
 
             </a>
 
-        </td>
+        {% endif %}
 
-    </tr>
+    </td>
 
-    {% endfor %}
+</tr>
+
+{% endfor %}
 
 </tbody>
 

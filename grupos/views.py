@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
+from calificaciones.models import Calificacion
 from .models import Grupo
 from .forms import GrupoForm
 
@@ -78,10 +78,24 @@ def detalle_grupo(request, id):
 
     estudiantes = grupo.estudiantes.all()
 
+    datos = []
+
+    for estudiante in estudiantes:
+
+        calificacion = Calificacion.objects.filter(
+            estudiante=estudiante,
+            grupo=grupo
+        ).first()
+
+        datos.append({
+            'estudiante': estudiante,
+            'calificacion': calificacion
+        })
+
     context = {
 
         'grupo': grupo,
-        'estudiantes': estudiantes
+        'datos': datos
 
     }
 
