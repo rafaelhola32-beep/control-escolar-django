@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Calificacion
 from .forms import CalificacionForm
 
+from estudiantes.models import Estudiante
+from grupos.models import Grupo
+
 
 def lista_calificaciones(request):
 
@@ -67,3 +70,40 @@ def eliminar_calificacion(request, id):
     calificacion.delete()
 
     return redirect('lista_calificaciones')
+
+
+def capturar_calificacion(request, estudiante_id, grupo_id):
+
+    estudiante = get_object_or_404(
+        Estudiante,
+        id=estudiante_id
+    )
+
+    grupo = get_object_or_404(
+        Grupo,
+        id=grupo_id
+    )
+
+    if request.method == 'POST':
+
+        nota = request.POST.get('calificacion')
+
+        Calificacion.objects.create(
+            estudiante=estudiante,
+            grupo=grupo,
+            calificacion=nota
+        )
+
+        return redirect(
+            'detalle_grupo',
+            id=grupo.id
+        )
+
+    return render(
+        request,
+        'calificaciones/capturar.html',
+        {
+            'estudiante': estudiante,
+            'grupo': grupo
+        }
+    )

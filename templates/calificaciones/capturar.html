@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h3>
+
+                Capturar Calificación
+
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <p>
+
+                <strong>Alumno:</strong>
+
+                {{ estudiante.nombre }}
+
+            </p>
+
+            <p>
+
+                <strong>Grupo:</strong>
+
+                {{ grupo.nombre }}
+
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <label class="form-label">
+
+                    Calificación
+
+                </label>
+
+                <input
+                    type="number"
+                    name="calificacion"
+                    step="0.1"
+                    min="0"
+                    max="100"
+                    class="form-control"
+                    required
+                >
+
+                <br>
+
+                <button
+                    type="submit"
+                    class="btn btn-success"
+                >
+
+                    Guardar
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

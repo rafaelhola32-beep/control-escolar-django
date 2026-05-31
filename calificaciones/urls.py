@@ -27,4 +27,11 @@ urlpatterns = [
         eliminar_calificacion,
         name='eliminar_calificacion'
     ),
+
+    path(
+        'capturar/<int:estudiante_id>/<int:grupo_id>/',
+        capturar_calificacion,
+        name='capturar_calificacion'
+    ),
+
 ]

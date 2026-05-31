@@ -55,63 +55,46 @@
 
                 </thead>
 
-                <tbody>
+<tbody>
 
-                    {% for estudiante in estudiantes %}
+    {% for estudiante in estudiantes %}
 
-                    <tr>
+    <tr>
 
-                        <td>
-                            {{ estudiante.matricula }}
-                        </td>
+        <td>
 
-                        <td>
-                            {{ estudiante.nombre }}
-                        </td>
+            {{ estudiante.matricula }}
 
-                        <td>
-                            {{ estudiante.correo }}
-                        </td>
+        </td>
 
-                        <td>
+        <td>
 
-                            {% with encontrada=False %}
+            {{ estudiante.nombre }}
 
-                                {% for calificacion in estudiante.calificacion_set.all %}
+        </td>
 
-                                    {% if calificacion.grupo.id == grupo.id %}
+        <td>
 
-                                        {{ calificacion.calificacion }}
+            {{ estudiante.correo }}
 
-                                    {% endif %}
+        </td>
 
-                                {% empty %}
+        <td>
 
-                                    Sin captura
+            <a href="{% url 'capturar_calificacion' estudiante.id grupo.id %}"
+               class="btn btn-success btn-sm">
 
-                                {% endfor %}
+                Capturar
 
-                            {% endwith %}
+            </a>
 
-                        </td>
+        </td>
 
-                    </tr>
+    </tr>
 
-                    {% empty %}
+    {% endfor %}
 
-                    <tr>
-
-                        <td colspan="4">
-
-                            No hay estudiantes en este grupo.
-
-                        </td>
-
-                    </tr>
-
-                    {% endfor %}
-
-                </tbody>
+</tbody>
 
             </table>
 

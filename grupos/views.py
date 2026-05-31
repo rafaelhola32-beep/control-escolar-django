@@ -78,11 +78,15 @@ def detalle_grupo(request, id):
 
     estudiantes = grupo.estudiantes.all()
 
+    context = {
+
+        'grupo': grupo,
+        'estudiantes': estudiantes
+
+    }
+
     return render(
         request,
         'grupos/detalle.html',
-        {
-            'grupo': grupo,
-            'estudiantes': estudiantes
-        }
+        context
     )
