@@ -23,3 +23,21 @@ class ProfesorForm(forms.ModelForm):
                 attrs={'class': 'form-control'}
             ),
         }
+    
+    def clean_profesor (self):
+
+        profesor = self.cleaned_data['profesor']
+
+        if profesor.objects.filter(
+            profesor = profesor
+        ).exclude(
+            pk=self.instance.pk
+        ).exists():
+
+            raise forms.ValidationError(
+                'Ya existe un Profesor con ese nombre.'
+            )
+
+        return profesor
+    
+

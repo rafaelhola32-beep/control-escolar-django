@@ -11,7 +11,10 @@ from carreras.models import Carrera
 
 class Grupo(models.Model):
 
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(
+    max_length=100,
+    unique=True
+)
 
     profesor = models.ForeignKey(
         Profesor,

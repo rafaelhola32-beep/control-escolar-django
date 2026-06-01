@@ -1,6 +1,7 @@
 from django import forms
 from .models import Grupo
 
+
 class GrupoForm(forms.ModelForm):
 
     class Meta:
@@ -45,3 +46,19 @@ class GrupoForm(forms.ModelForm):
                 }
             ),
         }
+
+    def clean_nombre(self):
+
+        nombre = self.cleaned_data['nombre']
+
+        if Grupo.objects.filter(
+            nombre=nombre
+        ).exclude(
+            pk=self.instance.pk
+        ).exists():
+
+            raise forms.ValidationError(
+                'Ya existe un grupo con ese nombre.'
+            )
+
+        return nombre
