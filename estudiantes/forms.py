@@ -43,3 +43,19 @@ class EstudianteForm(forms.ModelForm):
             )
 
         return matricula
+    
+    def clean_nombre(self):
+
+        nombre = self.cleaned_data['nombre']
+
+        if Estudiante.objects.filter(
+            nombre=nombre
+        ).exclude(
+            pk=self.instance.pk
+        ).exists():
+
+            raise forms.ValidationError(
+                'Ya existe un estudiante con ese nombre.'
+            )
+
+        return nombre
