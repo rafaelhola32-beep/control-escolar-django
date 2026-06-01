@@ -92,11 +92,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
-    DATABASE_URL = str(DATABASE_URL)
 
-DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL)
-}
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
+    }
+
+else:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'Control_Escolar_2026',
+            'USER': 'postgres',
+            'PASSWORD': '1203',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

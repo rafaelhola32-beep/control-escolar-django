@@ -3,8 +3,16 @@ from carreras.models import Carrera
 
 class Estudiante(models.Model):
 
-    nombre = models.CharField(max_length=100)
-    matricula = models.CharField(max_length=20)
+    nombre = models.CharField(
+        max_length=100,
+        unique=True
+    )
+
+    matricula = models.CharField(
+        max_length=20,
+        unique=True
+    )
+
     correo = models.EmailField()
 
     carrera = models.ForeignKey(

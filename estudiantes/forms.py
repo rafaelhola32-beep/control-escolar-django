@@ -27,3 +27,19 @@ class EstudianteForm(forms.ModelForm):
                 attrs={'class': 'form-select'}
             ),
         }
+
+    def clean_matricula(self):
+
+        matricula = self.cleaned_data['matricula']
+
+        if Estudiante.objects.filter(
+            matricula=matricula
+        ).exclude(
+            pk=self.instance.pk
+        ).exists():
+
+            raise forms.ValidationError(
+                'Ya existe un estudiante con esa matrícula.'
+            )
+
+        return matricula
