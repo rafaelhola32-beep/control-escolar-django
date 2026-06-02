@@ -2,20 +2,222 @@
 
 {% block content %}
 
-<h1>Editar Estudiante</h1>
+<h1 class="mb-4">Editar Grupo</h1>
 
 <form method="POST">
 
     {% csrf_token %}
 
-    {{ formulario.as_p }}
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        {{ formulario.nombre }}
+    </div>
 
-    <button class="btn btn-warning">
+    <div class="mb-3">
+        <label class="form-label">Carrera</label>
+        {{ formulario.carrera }}
+    </div>
 
-        Actualizar
+    <div class="mb-3">
+        <label class="form-label">Profesor</label>
+        {{ formulario.profesor }}
+    </div>
 
+    <div class="mb-3">
+        <label class="form-label">Materia</label>
+        {{ formulario.materia }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Aula</label>
+        {{ formulario.aula }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Horario</label>
+        {{ formulario.horario }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Periodo</label>
+        {{ formulario.periodo }}
+    </div>
+
+    <hr>
+
+    <h3 class="text-primary">Estudiantes</h3>
+
+    <input
+        type="text"
+        id="buscarEstudiante"
+        class="form-control mb-3"
+        placeholder="Buscar estudiante..."
+    >
+
+    <div id="resultados"></div>
+
+    <hr>
+
+    <h5>Estudiantes agregados</h5>
+
+    <div id="seleccionados"></div>
+
+    <div style="display:none;">
+        {{ formulario.estudiantes }}
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-warning">
+        Actualizar Grupo
     </button>
 
+    <a href="{% url 'lista_grupos' %}"
+       class="btn btn-secondary">
+       Cancelar
+    </a>
+
 </form>
+
+<script>
+
+const selectOriginal =
+document.getElementById('id_estudiantes');
+
+const buscador =
+document.getElementById('buscarEstudiante');
+
+const resultados =
+document.getElementById('resultados');
+
+const seleccionados =
+document.getElementById('seleccionados');
+
+let estudiantes = [];
+
+for(let option of selectOriginal.options){
+
+    estudiantes.push({
+        id: option.value,
+        nombre: option.text
+    });
+
+}
+
+buscador.addEventListener(
+    'keyup',
+    function(){
+
+        let texto =
+        this.value.toLowerCase();
+
+        resultados.innerHTML='';
+
+        if(texto.length < 2){
+            return;
+        }
+
+        estudiantes.forEach(est=>{
+
+            if(
+                est.nombre
+                .toLowerCase()
+                .includes(texto)
+            ){
+
+                resultados.innerHTML += `
+                <div class="card shadow-sm p-2 mb-2">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span>${est.nombre}</span>
+
+                        <button
+                            type="button"
+                            class="btn btn-success btn-sm"
+                            onclick="agregar('${est.id}')"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+                `;
+
+            }
+
+        });
+
+    }
+);
+
+function agregar(id){
+
+    let option =
+    selectOriginal.querySelector(
+        `option[value="${id}"]`
+    );
+
+    option.selected = true;
+
+    renderSeleccionados();
+
+    buscador.value = '';
+
+    resultados.innerHTML = '';
+
+}
+
+function eliminar(id){
+
+    let option =
+    selectOriginal.querySelector(
+        `option[value="${id}"]`
+    );
+
+    option.selected = false;
+
+    renderSeleccionados();
+
+}
+
+function renderSeleccionados(){
+
+    seleccionados.innerHTML='';
+
+    for(let option of selectOriginal.options){
+
+        if(option.selected){
+
+            seleccionados.innerHTML += `
+            <div class="card border-primary shadow-sm p-2 mb-2">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <span>${option.text}</span>
+
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        onclick="eliminar('${option.value}')"
+                    >
+                        X
+                    </button>
+
+                </div>
+
+            </div>
+            `;
+
+        }
+
+    }
+
+}
+
+renderSeleccionados();
+
+</script>
 
 {% endblock %}
