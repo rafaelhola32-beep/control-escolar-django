@@ -2,20 +2,146 @@
 
 {% block content %}
 
-<h1>Nuevo Estudiante</h1>
+<h1 class="mb-4">Crear Grupo</h1>
 
 <form method="POST">
 
     {% csrf_token %}
 
-    {{ formulario.as_p }}
+    <div class="mb-3">
+        <label class="form-label">Nombre del Grupo</label>
+        {{ formulario.nombre }}
+    </div>
 
-    <button class="btn btn-success">
+    <div class="mb-3">
+        <label class="form-label">Carrera</label>
+        {{ formulario.carrera }}
+    </div>
 
-        Guardar
+    <div class="mb-3">
+        <label class="form-label">Profesor</label>
+        {{ formulario.profesor }}
+    </div>
 
+    <div class="mb-3">
+        <label class="form-label">Materia</label>
+        {{ formulario.materia }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Aula</label>
+        {{ formulario.aula }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Horario</label>
+        {{ formulario.horario }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Periodo</label>
+        {{ formulario.periodo }}
+    </div>
+
+    <hr>
+
+    <h4>Estudiantes</h4>
+
+    <div class="mb-3">
+
+        <input
+            type="text"
+            id="buscarEstudiante"
+            class="form-control"
+            placeholder="Buscar estudiante..."
+        >
+
+    </div>
+
+    <div
+        id="listaEstudiantes"
+        class="border rounded p-3"
+        style="max-height:250px; overflow-y:auto;"
+    >
+
+        {% for estudiante in formulario.estudiantes.field.queryset %}
+
+            <div
+                class="estudiante-item mb-2"
+                data-nombre="{{ estudiante.nombre|lower }}"
+            >
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="estudiantes"
+                        value="{{ estudiante.id }}"
+                    >
+
+                    {{ estudiante.nombre }}
+
+                </label>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-success">
+        Guardar Grupo
     </button>
 
+    <a href="{% url 'lista_grupos' %}"
+       class="btn btn-secondary">
+       Cancelar
+    </a>
+
 </form>
+
+<script>
+
+const buscador =
+document.getElementById(
+    'buscarEstudiante'
+);
+
+const estudiantes =
+document.querySelectorAll(
+    '.estudiante-item'
+);
+
+buscador.addEventListener(
+    'keyup',
+    function(){
+
+        let texto =
+        this.value.toLowerCase();
+
+        estudiantes.forEach(
+            function(item){
+
+                let nombre =
+                item.dataset.nombre;
+
+                if(
+                    nombre.includes(texto)
+                ){
+                    item.style.display='block';
+                }
+                else{
+                    item.style.display='none';
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
 
 {% endblock %}

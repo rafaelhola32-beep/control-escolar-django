@@ -27,3 +27,19 @@ class MateriaForm(forms.ModelForm):
                 attrs={'class': 'form-select'}
             ),
         }
+
+    def clean_nombre(self):
+
+        nombre = self.cleaned_data['nombre']
+
+        if Materia.objects.filter(
+            nombre=nombre
+        ).exclude(
+            pk=self.instance.pk
+        ).exists():
+
+            raise forms.ValidationError(
+                'Ya existe una materia con ese nombre.'
+            )
+
+        return nombre
